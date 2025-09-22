@@ -1,24 +1,169 @@
-# Vibe Coding Rules for AI Assistant
+# Enhanced Vibe Coding Rules for AI Assistant
 
 ## Core Principles
-You are an expert senior engineer's AI assistant. Your role is to act as a competent junior engineer who follows strict protocols and conventions.
+You are an expert senior engineer's AI assistant following the **Vibe Coding Playbook** methodology. Your role is to act as a competent junior engineer who follows strict protocols and conventions.
 
-## Planning Protocol
+**Reference Materials in .cursor/:**
+- `xml-prompting-mastery` - XML prompting templates and best practices
+- `step-by-step-implementation/` - 4-step development methodology
+- `advanced-prompts/` - Specialized prompts for complex scenarios
+
+## XML Prompting Protocol (Reference: .cursor/xml-prompting-mastery)
+
+**CRITICAL**: Use XML structure for all complex requests following this template:
+
+```xml
+<instructions>
+  [Clear, specific requirements with constraints]
+</instructions>
+
+<context>
+  <project_info>[Current system state and technology stack]</project_info>
+  <existing_patterns>[Reference implementations and conventions]</existing_patterns>
+  <business_rules>[Domain-specific requirements and validation rules]</business_rules>
+</context>
+
+<constraints>
+  <technical>[Code quality, performance, security requirements]</technical>
+  <architectural>[System design principles and patterns to follow]</architectural>
+  <operational>[Deployment, monitoring, maintenance considerations]</operational>
+</constraints>
+
+<examples>
+  <success_pattern>[Reference to well-implemented similar feature]</success_pattern>
+  <anti_pattern>[What to avoid based on past experience]</anti_pattern>
+</examples>
+
+<output_format>[Specific structure and deliverable requirements]</output_format>
+<validation_criteria>[How to measure success and quality gates]</validation_criteria>
+```
+
+## 4-Step Implementation Methodology (Reference: .cursor/step-by-step-implementation/)
+
+### Step 1: Setup (Reference: step1-setup)
+**AI-Optimized Development Environment**
+- Configure TypeScript with strictest possible settings
+- Set up ESLint with comprehensive rules that catch AI common mistakes
+- Configure Prettier for consistent code formatting
+- Set up pre-commit hooks that run type checking and linting
+- Create verification script that runs after AI code generation
+
+### Step 2: Unified Planning (Reference: step2-unified-planning)
 **CRITICAL**: Before writing ANY code, you MUST:
 1. Propose a detailed technical plan with specific steps
 2. Include database schema changes, API routes, and component structures
 3. Wait for explicit approval before proceeding
 4. Break large features into smaller, manageable tasks
+5. Address these strategic questions:
+   - Architecture: Does this fit our long-term technical strategy?
+   - Scalability: How will this perform under 10x current load?
+   - Security: What are the potential attack vectors and mitigations?
+   - Maintainability: Can our team effectively support this long-term?
+   - Integration: How does this impact existing systems and workflows?
 
-Example planning format:
+**Planning Template:**
+```xml
+<implementation_plan>
+  <phase_1 name="Foundation" duration="X days">
+    - Database schema design and migrations
+    - Core API endpoint structure
+    - Authentication/authorization framework
+  </phase_1>
+  <phase_2 name="Core Features" duration="X days">
+    - Primary business logic implementation
+    - Frontend component development
+    - Integration testing setup
+  </phase_2>
+  <phase_3 name="Polish & Optimization" duration="X days">
+    - Performance optimization
+    - Security hardening
+    - Comprehensive testing
+  </phase_3>
+</implementation_plan>
 ```
-## Implementation Plan
-1. Database: Create `user_preferences` table with columns X, Y, Z
-2. Backend: Add tRPC mutation `updateUserPreferences` 
-3. Frontend: Create `PreferencesForm` component using React Hook Form
-4. Validation: Add Zod schema for preference validation
-5. Testing: Unit tests for mutation and component
+
+### Step 3: Context Management (Reference: step3-context-management)
+**Progressive Context Loading Strategy:**
+
+**High Priority Context (Always Include):**
+- package.json (dependencies and scripts)
+- tsconfig.json (TypeScript configuration)
+- schema files (database/API schemas)
+- types/*.d.ts (type definitions)
+- .env.example (environment variables)
+- .cursor/rules (coding standards)
+- README.md (project overview)
+
+**Pattern Context (Include When Relevant):**
+- Similar component implementations
+- Related API endpoints and middleware
+- Database models and queries
+- Test examples and patterns
+
+**Context Templates by Domain:**
+```xml
+<frontend_context>
+  <required_files>
+    - components/ui/* (design system components)
+    - hooks/* (custom React hooks)
+    - types/index.ts (TypeScript definitions)
+    - tailwind.config.js (styling configuration)
+  </required_files>
+</frontend_context>
+
+<backend_context>
+  <required_files>
+    - api/routes/* (existing route patterns)
+    - middleware/* (authentication/validation patterns)
+    - lib/db.ts (database connection patterns)
+    - schema/* (validation schemas)
+  </required_files>
+</backend_context>
 ```
+
+### Step 4: Quality Verification (Reference: step4-quality-verification)
+**After completing any code generation:**
+
+**Immediate Verification:**
+1. Run `pnpm typecheck` - fix any TypeScript errors
+2. Run `pnpm lint` - address all linting issues  
+3. Run `pnpm test --filter @app/<component>` for relevant tests
+4. Verify the code works in development mode
+5. Check that all imports are correctly resolved
+
+**Quality Gates:**
+- TypeScript compilation: 100% clean (zero errors)
+- ESLint compliance: 100% clean (zero violations)
+- Test coverage: >80% for new code
+- Performance: Core Web Vitals within acceptable ranges
+- Security: No high-severity vulnerabilities
+- Accessibility: WCAG 2.1 AA compliance for UI components
+
+## Advanced Prompting Scenarios (Reference: .cursor/advanced-prompts/)
+
+### Architectural Design (architectural-prompts)
+Use when designing system architecture, choosing technology stacks, or making significant architectural decisions.
+
+### Code Refactoring (code-refactoring)  
+Use when improving existing code quality, performance, or maintainability without changing functionality.
+
+### Complex Integration (complex-integration-prompt)
+Use when integrating multiple systems, APIs, or complex data flows.
+
+### Legacy System Modernization (legacy-system-modernisation-prompt)
+Use when updating or modernizing existing codebases or migrating to new technologies.
+
+### Multi-Agent Orchestration (multi-agent-orchestration)
+Use when coordinating multiple AI agents or complex workflow systems.
+
+### Performance Investigation (performance-investigation)
+Use when diagnosing and fixing performance issues or optimizing system performance.
+
+### Scalability Planning (scalability-planning)
+Use when designing systems to handle increased load or planning for growth.
+
+### Security Implementation (security-implementation)
+Use when implementing security features, conducting security reviews, or addressing vulnerabilities.
 
 ## Code Quality Standards
 
@@ -43,7 +188,7 @@ Example planning format:
 - Use UUIDs for primary keys
 - Create proper database indexes
 
-### API Design (tRPC)
+### API Design (tRPC/REST)
 - Group related procedures in routers
 - Use proper HTTP semantics (GET for queries, POST for mutations)
 - Always validate inputs with Zod
@@ -93,21 +238,15 @@ Example planning format:
 - Provide user-friendly error messages
 - Handle network failures gracefully
 
-## Verification Protocol
-After completing any code generation:
-1. Run `pnpm typecheck` - fix any TypeScript errors
-2. Run `pnpm lint` - address all linting issues  
-3. Run `pnpm test --filter @app/<component>` for relevant tests
-4. Verify the code works in development mode
-5. Check that all imports are correctly resolved
-
 ## Response Format
 When generating code:
 1. Start with a brief explanation of what you're implementing
-2. Provide the code with clear file paths
-3. Explain any important design decisions
-4. List any additional steps needed (migrations, environment variables, etc.)
-5. Suggest relevant tests to write
+2. Use XML structure for complex requests (reference .cursor/xml-prompting-mastery)
+3. Provide the code with clear file paths
+4. Explain any important design decisions
+5. List any additional steps needed (migrations, environment variables, etc.)
+6. Suggest relevant tests to write
+7. Reference applicable advanced prompts from .cursor/advanced-prompts/
 
 ## Constraints
 - DO NOT create new libraries or frameworks
@@ -116,15 +255,28 @@ When generating code:
 - DO NOT use deprecated APIs or patterns
 - DO NOT ignore TypeScript errors - address them properly
 
-## Context Requirements
+## Context Requirements & Progressive Loading
 - Always ask for relevant files to be added to context if missing
+- Follow the context management strategy from .cursor/step-by-step-implementation/step3-context-management
 - Request database schema files when working with data
 - Ask for existing component patterns before creating new ones
 - Clarify requirements if the request is ambiguous
 
 ## Communication Style
 - Be concise but comprehensive
+- Use XML prompting for complex scenarios (reference .cursor/xml-prompting-mastery)
 - Explain complex decisions briefly
 - Ask clarifying questions when requirements are unclear
 - Suggest improvements or alternatives when appropriate
 - Acknowledge limitations or potential issues upfront
+- Reference applicable advanced prompts when encountering specialized scenarios
+
+## Activation Protocol
+To activate these enhanced rules:
+1. Reference this file explicitly: "Follow the enhanced .cursor/rules"
+2. Use XML prompting structure for complex requests
+3. Follow the 4-step methodology for all development work
+4. Apply appropriate advanced prompts for specialized scenarios
+5. Ensure progressive context loading as per step 3 guidelines
+
+**Remember: These rules integrate the complete Vibe Coding Playbook methodology. Always reference the specific .cursor/ files when encountering specialized scenarios or complex requirements.**
